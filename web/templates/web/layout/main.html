@@ -1,0 +1,78 @@
+{% load static %}
+{% load i18n %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-50439042-12"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-50439042-12');
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title> {{ _("Detect insect by photo") }}</title>
+
+    <link href="{% static 'web/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/animate.css' %}" rel="stylesheet">
+    <link href="{% static 'web/css/style.css' %}" rel="stylesheet">
+    <link rel="shortcut icon" href="{% static 'web/media/favicon.ico' %}" type="image/x-icon">
+</head>
+
+<body>
+    <header class="top-header navbar-default navbar navbar-static-top sticky-header yamm">
+        <div class="container">
+            <div class="pull-right nav-header-right">
+                <div class="h-item dropdown-search" id="search-trigger">
+                    <a href="javascript:void(0)"><i class="fa fa-search"></i></a>
+                </div>
+            </div>
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/"><img src="{% static 'web/media/logo-bug.png' %}" alt="logo"></a>
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown active">
+                        <a href="/" class="">{{ _("Recognize insect by photo") }}</a>
+                    </li>
+                </ul>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+        <!--/.container-fluid -->
+    </header>
+    {% block content %}{% endblock %}
+    <footer class="footer-v1 footer">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 margin-b-30">
+                    <h3>{{ _("About us") }}</h3>
+                    <p>
+                        <a href="https://springsapps.com" target="_blank">Springs - Web Development Company</a>
+                    </p>
+                </div>
+                <div class="col-md-6 margin-b-30">
+                    <h3>{{ _("Contacts") }}</h3>
+                    <p><a href="mailto:contact@springsapps.com">contact@springsapps.com</a></p>
+                </div>
+
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>

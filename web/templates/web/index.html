@@ -1,0 +1,63 @@
+{% extends "web/layout/main.html" %}
+{% load i18n %}
+
+{% block content %}
+<section class="section-padded half-image-section">
+  <div class="container-fluid">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="left-title wow animated fadeInUp" data-wow-delay="0.2s">
+            <h1>{{ _("Recognize insect app") }}</h1>
+            <h4>{{ _("Upload insect picture and determine what's that.") }}</h4>
+            <hr>
+          </div>
+          {% if not result %}
+          <div class="widget">
+            {{ _("Currently system recognizes the following kinds of insects:") }}
+            <ul class="list-inline tag-list">
+              {% for label in labels %}
+              <li><a>{{ label }}</a></li>
+              {% endfor %}
+            </ul>
+            <b>{{ _("The larger the insect in the image, the higher the accuracy of determination!") }}</b>
+          </div>
+          {% endif %}
+          {% if result %}
+          <h2>{{ _("Your image scanning results") }}</h2>
+          <div>
+            <div class="skill"><span class="skill-name">{{ result.2 }}</span><span class="skill-perc"
+                style="right: 0%;">{% widthratio result.1 1 100 %}%</span>
+              <div class="progress">
+                <div role="progressbar" class="progress-bar colored" style="width: {% widthratio result.1 1 100 %}%;"></div>
+              </div>
+            </div>
+            <div class="alert alert-danger">
+              {{  _('If you notice an inaccuracy in the definition, please write to us. We are always trying to improve the system.') }}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+        <div class="col-sm-6">
+          {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+          <form action="{% url 'index' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input style="margin: 30px 0" type="file" name="photo">
+            <input class="btn1 margin-b-30" type="submit" value={{  _('Upload') }}>
+            {% if form.errors %}
+            <div class="alert alert-danger alert-dismissible" role="alert">
+              {{ form.errors }}
+            </div>
+            {% endif %}
+          </form>
+          {% if form.instance.photo %}
+          <div>
+            <img class="img-responsive" src={{ form.instance.photo.url }} />
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

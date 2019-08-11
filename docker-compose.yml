@@ -1,0 +1,27 @@
+version: '3.2'
+
+services:
+  db:
+    image: postgres
+    environment:
+      POSTGRES_PASSWORD: k3ktrCacPEyxE7C9
+      POSTGRES_DB: insectscanner
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    ports:
+      - 5432:5432
+    expose:
+      - 5432
+    restart: always
+  app:
+    build: .
+    depends_on:
+      - db
+    ports:
+      - 8990:8990
+    command: python3 manage.py runserver 0.0.0.0:8990
+    restart: always
+
+volumes:
+  postgres_data:
+    
